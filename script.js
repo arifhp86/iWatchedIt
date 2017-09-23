@@ -1,33 +1,3 @@
-var DATA = [{
-	"id": 1,
-	"name": "Supergirl",
-	"seasons": [{
-		"id": 1,
-		"episodes": []
-	}, {
-		"id": 2,
-		"episodes": [{
-			"id": 1,
-			"watched": true
-		}, {
-			"id": 2,
-			"watched": false
-		}]
-	}]
-}, {
-	"id": 2,
-	"name": "Prison break",
-	"seasons": [{
-		"id": 1,
-		"episodes": [{
-			"id": 1,
-			"watched": true
-		}]
-	}]
-}];
-
-
-
 (function($) {
 
 	function IWatchedIt() {
@@ -94,9 +64,10 @@ var DATA = [{
 		}
 		var out = '';
 		this.data[this.activeShowIndex].seasons.forEach(function(item, index, arr) {
-			item.last = false;
-			if(index+1 === arr.length) item.last = true;
-			out += self.seasonItemTemp(item);
+			var itemCopy = $.extend({}, item);
+			itemCopy.last = false;
+			if(index+1 === arr.length) itemCopy.last = true;
+			out += self.seasonItemTemp(itemCopy);
 		});
 		this.$seasonList.html(out);
 		if(out === '') {
@@ -113,9 +84,10 @@ var DATA = [{
 		}
 		var out = '';
 		this.data[this.activeShowIndex]['seasons'][this.activeSeasonIndex]['episodes'].forEach(function(item, index, arr) {
-			item.last = false;
-			if(index+1 === arr.length) item.last = true;
-			out += self.episodeItemTemp(item);
+			var itemCopy = $.extend({}, item);
+			itemCopy.last = false;
+			if(index+1 === arr.length) itemCopy.last = true;
+			out += self.episodeItemTemp(itemCopy);
 		});
 		this.$episodeList.html(out);
 		if(out === '') {
@@ -184,6 +156,7 @@ var DATA = [{
 
 		this.$showList.on('click', '.show-delete', function(e) {
 			e.preventDefault();
+			if(!confirm('Are you sure you want to delete the show?')) return false;
 			var id = $(this).closest('li').data('show');
 			var index = self.getShowIndex(id)
 			self.data.splice(index, 1);
@@ -193,6 +166,7 @@ var DATA = [{
 
 		this.$seasonList.on('click', '.season-delete', function(e) {
 			e.preventDefault();
+			if(!confirm('Are you sure you want to delete the season?')) return false;
 			var id = $(this).closest('li').data('season');
 			var index = self.getSeasonIndex(id)
 			self.data[self.activeShowIndex]['seasons'].splice(index, 1);
