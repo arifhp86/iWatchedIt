@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1,
+		"name": "Supergirl",
+		"seasons": [{
+			"season": 1,
+			"episodes": [{
+				"episode": 1,
+				"watched": true
+			}, {
+				"episode": 2,
+				"watched": false
+			}]
+		}, {
+			"season": 2,
+			"episodes": [{
+				"episode": 1,
+				"watched": true
+			}, {
+				"episode": 2,
+				"watched": false
+			}]
+		}]
+	}, {
+		"id": 2,
+		"name": "Prison break",
+		"seasons": [{
+			"season": 1,
+			"episodes": [{
+				"episode": 1,
+				"watched": true
+			}, {
+				"episode": 2,
+				"watched": false
+			}]
+		}]
+	}
+]

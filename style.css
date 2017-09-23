@@ -1,0 +1,58 @@
+.show-form {
+	padding: 1rem;
+	background-color: #f8f9fa;
+}
+.list-group-item-right .custom-control {
+	min-height: 1rem;
+	padding-left: 1rem;
+	margin-right: .3rem;
+	margin-bottom: -.25rem;
+}
+.list-group-item-right .custom-control-indicator {
+	top: 0;
+}
+.entity-placeholder {
+	font-size: 1.2rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	text-align: center;
+	opacity: .2;
+	padding-bottom: 1rem;
+}
+.add-new,
+.show-loaded:not(.show-empty) #show-wrapper .entity-placeholder,
+.season-loaded:not(.season-empty) #season-wrapper .entity-placeholder,
+.episode-loaded:not(.episode-empty) #episode-wrapper .entity-placeholder {
+	display: none;
+}
+.season-loaded #season-wrapper .add-new,
+.episode-loaded #episode-wrapper .add-new {
+	display: block;
+}
+.episode-delete {
+	display: inline-block;
+	transform: translate(0, 2px);
+}
+.i-watched-it a .fa {
+	color: #ddd;
+}
+.i-watched-it a:hover .fa {
+	color: #555;
+}
+#show-list,
+#season-list {
+	cursor: pointer;
+}
+.list-group-item.active {
+	color: #000;
+	background-color: #eee;
+	border-color: #eee;
+}
+.list-group-item.active a .fa,
+.list-group-item:hover a .fa {
+	color: #555;
+}
+
+
+
+

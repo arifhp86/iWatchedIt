@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Hey! I watched it before!!</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="pos-f-t">
+      <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark pt-3 container-fluid text-light">
+          <div class="row">
+            <div class="col-sm-4">
+              <h5>Settings</h5>
+              <div class="custom-controls-stacked">
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="add-as-watched" />
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">Add new episodes as watched</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <h5>Action</h5>
+              <ul class="list-unstyled">
+                <li><a class="text-light" href="#">Export all data</a></li>
+                <li><a class="text-light" href="#">Import(and replace)</a></li>
+                <li><a class="text-danger" href="#">Empty all data</a></li>
+              </ul>
+            </div>
+            <!-- <div class="col-sm-4">
+              <h5>Account</h5>
+              <form action="" class="form-inline">
+                <div class="form-group">
+                  <label for="login" class="sr-only">Your email</label>
+                  <input type="email" class="form-control" id="login" name="login">
+                </div>
+                <button type="submit" class="btn btn-primary">Save all data</button>
+              </form>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">iWatchedIt</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa fa-cog"></i>
+        </button>
+      </nav>
+    </div>
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">iWatchedIt</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" data-toggle="modal" data-target="#imex-modal" href="#">Export</a>
+              <a class="dropdown-item" href="#">Import</a>
+              <a class="dropdown-item" href="#">Empty List</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav> -->
+    
+    <section class="pt-5 i-watched-it">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-4 entity-wrapper" id="show-wrapper">
+            <div class="list-group" id="show-list">
+              <!-- <li class="list-group-item list-group-item-action d-flex justify-content-between">
+                <div class="form-row w-100">
+                  <div class="col">
+                    <input type="text" value="Once Upon a time" class="form-control" />
+                  </div>
+                  <div class="col-auto">
+                    <input type="submit" value="Update" class="btn btn-secondary" />
+                  </div>
+                </div>
+                <div class="list-group-item-right" style="display: none;">
+                  <label class="custom-control custom-checkbox" title="Show Complete">
+                    <input type="checkbox" class="custom-control-input" />
+                    <span class="custom-control-indicator"></span>
+                  </label>
+                  <a href="#"><i class="fa fa-pencil"></i></a>
+                  <a href="#"><i class="fa fa-trash"></i></a>
+                </div>
+              </li> -->
+            </div>
+            <div class="entity-placeholder">TV Shows</div>
+            <div class="add-show">
+              <button class="btn btn-secondary btn-block" id="add-show-btn">Add new TV show</button>
+            </div>
+            <div class="show-form-wrapper"></div>
+            <!-- <form action="" class="edit-form">
+              <div class="form-group">
+                <label for="">Show Name</label>
+                <input type="text" class="form-control" />
+              </div>
+              <button class="btn btn-secondary" type="submit">Add Show</button>
+            </form> -->
+          </div>
+          <div class="col-sm-4 entity-wrapper" id="season-wrapper">
+            <div class="list-group" id="season-list"><!-- js content entry point --></div>
+            <div class="entity-placeholder">Seasons</div>
+            <div class="add-new">
+              <button class="btn btn-secondary btn-block" id="add-season">Add new season</button>
+            </div>
+            <!-- <form action="" class="edit-form">
+              <div class="form-group">
+                <label for="">Number of Episode</label>
+                <input type="number" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" />
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">All episodes watched</span>
+                </label>
+              </div>
+              <button class="btn btn-secondary" type="submit">Add Season</button>
+            </form> -->
+          </div>
+          <div class="col-sm-4 entity-wrapper" id="episode-wrapper">
+            <div class="list-group" id="episode-list"><!-- js content entry point --></div>
+            <div class="entity-placeholder">Episodes</div>
+            <div class="add-new">
+              <button class="btn btn-secondary btn-block" id="add-episode">Add new episide</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="modal fade" tabindex="-1" id="imex-modal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content p-5">
+          <form action="">
+            <div class="form-group">
+              <textarea name="" id="" cols="30" rows="10" class="form-control">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta repellendus voluptate vero laudantium laborum blanditiis beatae deserunt et consequatur, obcaecati nihil omnis soluta voluptates sunt quod ducimus dolorum nemo minus. ipsum dolor sit amet, consectetur adipisicing elit. Quisquam sit necessitatibus laborum quibusdam, ipsum, cupiditate esse vitae ipsa explicabo eaque animi exercitationem cum sunt voluptas reprehenderit maiores expedita libero modi. ipsum dolor sit amet, consectetur adipisicing elit. Eaque sint explicabo non assumenda neque optio provident, ducimus expedita deleniti consequuntur id nesciunt obcaecati, reiciendis. Corporis sed minus hic placeat. Architecto.</textarea>
+            </div>
+            <button class="btn btn-primary">Import</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <script id="show-item" type="text/x-handlebars-template">
+      <li class="list-group-item list-group-item-action d-flex justify-content-between" data-show="{{id}}">
+          <span>{{name}}</span>
+          <div class="list-group-item-right">
+            <a href="#" class="show-edit"><i class="fa fa-pencil"></i></a>
+            <a href="#" class="show-delete"><i class="fa fa-trash"></i></a>
+          </div>
+        </li>
+    </script>
+    <script id="season-item" type="text/x-handlebars-template">
+      <li class="list-group-item list-group-item-action d-flex justify-content-between" data-season="{{id}}">
+          <span>Season {{id}}</span>
+          <div class="list-group-item-right">
+            {{#if last}}
+            <a href="#" class="season-delete"><i class="fa fa-trash"></i></a>
+            {{/if}}
+          </div>
+        </li>
+    </script>
+    <script id="episode-item" type="text/x-handlebars-template">
+      <li class="list-group-item list-group-item-action d-flex justify-content-between" data-episode="{{id}}">
+          <span>Episode {{id}}</span>
+          <div class="list-group-item-right">
+            {{#if last}}
+            <a href="#" class="episode-delete"><i class="fa fa-trash"></i></a>
+            {{/if}}
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" {{#if watched}} checked{{/if}} />
+              <span class="custom-control-indicator"></span>
+            </label>
+          </div>
+        </li>
+    </script>
+    <script id="show-form-temp" type="text/x-handlebars-template">
+      <form action="" class="show-form">
+        <div class="form-group">
+          <input type="text" id="new-show-name" class="form-control" placeholder="Show name" />
+        </div>
+        <button class="btn btn-secondary" type="submit">Add show</button>
+      </form>
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
