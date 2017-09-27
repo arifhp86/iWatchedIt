@@ -1,5 +1,4 @@
-(function($) {
-
+(function($) {	
 	function IWatchedIt() {
 		this.data = [];
 		this.settings = {};
@@ -20,7 +19,7 @@
 		this.activeShowId = null;
 		this.activeSeasonId = null;
 
-		this.addAsWatched = typeof this.settings.addAsWatched !== 'undefined' ? this.settings.addAsWatched : false;
+		this.addAsWatched = typeof this.settings.addAsWatched !== 'undefined' ? this.settings.addAsWatched : 0;
 
 		this.showItemTemp = Handlebars.compile($('#show-item').html());
 		this.seasonItemTemp = Handlebars.compile($('#season-item').html());
@@ -59,11 +58,11 @@
 
 	IWatchedIt.prototype.renderSeasonList = function() {
 		var self = this;
-		if(typeof this.data[this.activeShowIndex].seasons === 'undefined') {
+		if(typeof this.data[this.activeShowIndex].sns === 'undefined') {
 			return;
 		}
 		var out = '';
-		this.data[this.activeShowIndex].seasons.forEach(function(item, index, arr) {
+		this.data[this.activeShowIndex].sns.forEach(function(item, index, arr) {
 			var itemCopy = $.extend({}, item);
 			itemCopy.last = false;
 			if(index+1 === arr.length) itemCopy.last = true;
@@ -79,11 +78,11 @@
 
 	IWatchedIt.prototype.renderEpisodeList = function() {
 		var self = this;
-		if(typeof this.data[this.activeShowIndex]['seasons'][this.activeSeasonIndex]['episodes'] === 'undefined') {
+		if(typeof this.data[this.activeShowIndex].sns[this.activeSeasonIndex].eps === 'undefined') {
 			return;
 		}
 		var out = '';
-		this.data[this.activeShowIndex]['seasons'][this.activeSeasonIndex]['episodes'].forEach(function(item, index, arr) {
+		this.data[this.activeShowIndex].sns[this.activeSeasonIndex].eps.forEach(function(item, index, arr) {
 			var itemCopy = $.extend({}, item);
 			itemCopy.last = false;
 			if(index+1 === arr.length) itemCopy.last = true;
@@ -100,25 +99,25 @@
 	IWatchedIt.prototype.getTheItem = function(id, data, type) {
 		data = typeof data === 'undefined' ? this.data : data[type];
 		return _.find(data, function(item) {
-			return item.id === id;
+			return item.i === id;
 		});
 	};
 
 	IWatchedIt.prototype.getShowIndex = function(id) {
 		return _.findIndex(this.data, function(item) {
-			return item.id === id;
+			return item.i === id;
 		});
 	};
 
 	IWatchedIt.prototype.getSeasonIndex = function(id) {
-		return _.findIndex(this.data[this.activeShowIndex]['seasons'], function(item) {
-			return item.id === id;
+		return _.findIndex(this.data[this.activeShowIndex].sns, function(item) {
+			return item.i === id;
 		});
 	};
 
 	IWatchedIt.prototype.getEpisodeIndex = function(id) {
-		return _.findIndex(this.data[this.activeShowIndex]['seasons'][this.activeSeasonIndex]['episodes'], function(item) {
-			return item.id === id;
+		return _.findIndex(this.data[this.activeShowIndex].sns[this.activeSeasonIndex].eps, function(item) {
+			return item.i === id;
 		});
 	};
 
@@ -169,7 +168,7 @@
 			if(!confirm('Are you sure you want to delete the season?')) return false;
 			var id = $(this).closest('li').data('season');
 			var index = self.getSeasonIndex(id)
-			self.data[self.activeShowIndex]['seasons'].splice(index, 1);
+			self.data[self.activeShowIndex].sns.splice(index, 1);
 			self.$body.trigger('season:reload').trigger('update');
 			e.stopPropagation();
 		});
@@ -178,7 +177,7 @@
 			e.preventDefault();
 			var id = $(this).closest('li').data('episode');
 			var index = self.getEpisodeIndex(id)
-			self.data[self.activeShowIndex]['seasons'][self.activeSeasonIndex]['episodes'].splice(index, 1);
+			self.data[self.activeShowIndex].sns[self.activeSeasonIndex].eps.splice(index, 1);
 			self.$body.trigger('episode:reload').trigger('update');
 			e.stopPropagation();
 		});
@@ -202,12 +201,12 @@
 		this.$episodeList.on('change', '.custom-control-input', function(e) {
 			var id = $(this).closest('li').data('episode');
 			var epIndex = self.getEpisodeIndex(id);
-			self.data[self.activeShowIndex].seasons[self.activeSeasonIndex].episodes[epIndex].watched = this.checked;
+			self.data[self.activeShowIndex].sns[self.activeSeasonIndex].eps[epIndex].w = +this.checked;
 			self.$body.trigger('update');
 		});
 
 		$('#add-as-watched').on('change', function() {
-			self.settings.addAsWatched = this.checked;
+			self.settings.addAsWatched = self.addAsWatched = +this.checked;
 			self.$body.trigger('update');
 		});
 
@@ -225,30 +224,30 @@
 
 	IWatchedIt.prototype.addNewShow = function(name) {
 		var index = this.data.length, id = this.topId();
-		var newSh = {id: id, name: name, seasons: []};
+		var newSh = {i: id, n: name, sns: []};
 		this.data[index] = newSh;
 		this.$body.trigger('show:reload').trigger('update');
 	};
 
 	IWatchedIt.prototype.addNewSeason = function() {
-		var seasons = this.data[this.activeShowIndex].seasons;
-		var newSe = {id: seasons.length+1, episodes: []};
-		this.data[this.activeShowIndex].seasons[seasons.length] = newSe;
+		var seasons = this.data[this.activeShowIndex].sns;
+		var newSe = {i: seasons.length+1, eps: []};
+		this.data[this.activeShowIndex].sns[seasons.length] = newSe;
 		this.renderSeasonList();
 		this.$body.trigger('update');
 	};
 
 	IWatchedIt.prototype.addNewEpisode = function() {
-		var episodes = this.data[this.activeShowIndex].seasons[this.activeSeasonIndex].episodes;
-		var newEp = {id: episodes.length+1, watched: false};
-		if(this.addAsWatched) newEp.watched = true;
-		this.data[this.activeShowIndex].seasons[this.activeSeasonIndex].episodes[episodes.length] = newEp;
+		var episodes = this.data[this.activeShowIndex].sns[this.activeSeasonIndex].eps;
+		var newEp = {i: episodes.length+1, w: 0};
+		if(this.addAsWatched) newEp.w = 1;
+		this.data[this.activeShowIndex].sns[this.activeSeasonIndex].eps[episodes.length] = newEp;
 		this.renderEpisodeList();
-		self.$body.trigger('update');
+		this.$body.trigger('update');
 	};
 
 	IWatchedIt.prototype.topId = function(type) {
-		return this.data.length > 0 ? +this.data[this.data.length-1].id + 1 : 1;
+		return this.data.length > 0 ? +this.data[this.data.length-1].i + 1 : 1;
 	};
 
 	IWatchedIt.prototype.bodyEvents = function() {
@@ -320,12 +319,3 @@
 	});
 
 })(jQuery);
-
-
-
-
-
-
-
-
-

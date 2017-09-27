@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <body class="pb-5">
     <div class="pos-f-t">
       <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark pt-3 container-fluid text-light">
@@ -163,8 +163,8 @@
     </div>
     
     <script id="show-item" type="text/x-handlebars-template">
-      <li class="list-group-item list-group-item-action d-flex justify-content-between" data-show="{{id}}">
-          <span>{{name}}</span>
+      <li class="list-group-item list-group-item-action d-flex justify-content-between" data-show="{{i}}">
+          <span>{{n}}</span>
           <div class="list-group-item-right">
             <a href="#" class="show-edit"><i class="fa fa-pencil"></i></a>
             <a href="#" class="show-delete"><i class="fa fa-trash"></i></a>
@@ -172,8 +172,8 @@
         </li>
     </script>
     <script id="season-item" type="text/x-handlebars-template">
-      <li class="list-group-item list-group-item-action d-flex justify-content-between" data-season="{{id}}">
-          <span>Season {{id}}</span>
+      <li class="list-group-item list-group-item-action d-flex justify-content-between" data-season="{{i}}">
+          <span>Season {{i}}</span>
           <div class="list-group-item-right">
             {{#if last}}
             <a href="#" class="season-delete"><i class="fa fa-trash"></i></a>
@@ -182,14 +182,14 @@
         </li>
     </script>
     <script id="episode-item" type="text/x-handlebars-template">
-      <li class="list-group-item list-group-item-action d-flex justify-content-between" data-episode="{{id}}">
-          <span>Episode {{id}}</span>
+      <li class="list-group-item list-group-item-action d-flex justify-content-between" data-episode="{{i}}">
+          <span>Episode {{i}}</span>
           <div class="list-group-item-right">
             {{#if last}}
             <a href="#" class="episode-delete"><i class="fa fa-trash"></i></a>
             {{/if}}
             <label class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" {{#if watched}} checked{{/if}} />
+              <input type="checkbox" class="custom-control-input" {{#if w}} checked{{/if}} />
               <span class="custom-control-indicator"></span>
             </label>
           </div>
