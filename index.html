@@ -30,9 +30,9 @@
             <div class="col-sm-4">
               <h5>Action</h5>
               <ul class="list-unstyled">
-                <li><a class="text-light" href="#">Export all data</a></li>
-                <li><a class="text-light" href="#">Import(and replace)</a></li>
-                <li><a class="text-danger" href="#">Empty all data</a></li>
+                <li><a class="text-light" href="#" id="export" data-toggle="modal" data-target="#imex-modal" data-type="export-modal">Export all shows</a></li>
+                <li><a class="text-light" href="#" data-toggle="modal" data-target="#imex-modal" data-type="import-modal">Import shows</a></li>
+                <li><a class="text-danger" href="#" id="empty">Remove all shows</a></li>
               </ul>
             </div>
             <!-- <div class="col-sm-4">
@@ -153,10 +153,9 @@
         <div class="modal-content p-5">
           <form action="">
             <div class="form-group">
-              <textarea name="" id="" cols="30" rows="10" class="form-control">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta repellendus voluptate vero laudantium laborum blanditiis beatae deserunt et consequatur, obcaecati nihil omnis soluta voluptates sunt quod ducimus dolorum nemo minus. ipsum dolor sit amet, consectetur adipisicing elit. Quisquam sit necessitatibus laborum quibusdam, ipsum, cupiditate esse vitae ipsa explicabo eaque animi exercitationem cum sunt voluptas reprehenderit maiores expedita libero modi. ipsum dolor sit amet, consectetur adipisicing elit. Eaque sint explicabo non assumenda neque optio provident, ducimus expedita deleniti consequuntur id nesciunt obcaecati, reiciendis. Corporis sed minus hic placeat. Architecto.</textarea>
+              <textarea id="imex-input" cols="30" rows="10" class="form-control"></textarea>
             </div>
-            <button class="btn btn-primary">Import</button>
-
+            <button class="btn btn-primary" id="import-btn">Import</button>
           </form>
         </div>
       </div>

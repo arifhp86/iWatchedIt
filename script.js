@@ -217,6 +217,39 @@
 				self.addNewShow(name.val());
 			}
 			name.val('');
+		});
+
+		// export shows
+		$('#export').on('click', function(e) {
+
+		});
+
+		$('#imex-modal').on('show.bs.modal', function(e) {
+			var type = $(e.relatedTarget).data('type'); 
+			$(this).addClass(type);
+			if(type==='export-modal') {
+				var data = window.localStorage.getItem('_iwatchedit') || '';
+				$('#imex-input').val(data);
+			}
+		});
+
+		$('#import-btn').on('click', function(e) {
+			e.preventDefault();
+			window.localStorage.setItem('_iwatchedit', $('#imex-input').val());
+			$('#imex-modal').modal('hide');
+			self.$body.trigger('update');
+		});
+
+		$('#imex-modal').on('hide.bs.modal', function(e) {
+			var $link = $(e.relatedTarget); 
+			$(this).removeClass($link.data('type'));
+			$(this).find('#imex-input').val('');
+		});
+
+		$('#empty').on('click', function(e) {
+			e.preventDefault();
+			window.localStorage.setItem('_iwatchedit', $('#imex-input').val());
+			self.$body.trigger('update');
 		})
 
 

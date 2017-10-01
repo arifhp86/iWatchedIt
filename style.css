@@ -53,6 +53,10 @@
 	color: #555;
 }
 
+.export-modal #import-btn {
+	display: none;
+}
+
 
 
 
