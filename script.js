@@ -42,9 +42,19 @@
 		this.addEvents();
 	};
 
-	IWatchedIt.prototype.renderShowList = function() {
+	IWatchedIt.prototype.renderShowList = function(refresh) {
 		var self = this;
 		var output = '';
+		if(refresh) {
+			var _iwatchedit = window.localStorage.getItem('_iwatchedit');
+			if(_iwatchedit !== null) {
+				_iwatchedit = JSON.parse(_iwatchedit);
+				this.data = _iwatchedit['data'];
+				this.settings = _iwatchedit['settings'];
+			} else {
+				window.localStorage.setItem('_iwatchedit', JSON.stringify({data: [], settings: {}}));
+			}
+		}
 		this.data.forEach(function(i) {
 			output += self.showItemTemp(i);
 		});
@@ -193,7 +203,6 @@
 		});
 
 		$('#add-show-btn').on('click', function(e) {
-
 			var htm = self.showFormTemp();
 			$('.show-form-wrapper').html(htm);
 		});
@@ -237,7 +246,8 @@
 			e.preventDefault();
 			window.localStorage.setItem('_iwatchedit', $('#imex-input').val());
 			$('#imex-modal').modal('hide');
-			self.$body.trigger('update');
+			self.renderShowList(true);
+			self.$body.trigger('season:unfocus').trigger('episode:unfocus');
 		});
 
 		$('#imex-modal').on('hide.bs.modal', function(e) {
@@ -248,8 +258,11 @@
 
 		$('#empty').on('click', function(e) {
 			e.preventDefault();
-			window.localStorage.setItem('_iwatchedit', $('#imex-input').val());
-			self.$body.trigger('update');
+			if(confirm('Are you sure you want to delete all show?')) {
+				window.localStorage.setItem('_iwatchedit', JSON.stringify({data: [], settings: {}}));
+				self.renderShowList(true);
+				self.$body.trigger('season:unfocus').trigger('episode:unfocus');	
+			}
 		})
 
 
